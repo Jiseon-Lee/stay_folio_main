@@ -1,3 +1,5 @@
+#📝 개인 개발 기록
+
 ## 👤 역할
 
 - **회원/예약 관련 기능 및 보안(Spring Security)** 담당
@@ -139,7 +141,7 @@ public CustomUser(MemberVO vo) {
 
 ---
 
-### 📅 예약 (Flatpickr 적용)
+### 5️⃣ 예약 (Flatpickr 적용)
 
 - **처음 시도**: 체크인 불가 날짜를 전부 `disable` 처리 → 체크아웃 날짜용 클래스를 붙이려 했으나 `disable`이 다른 클래스 제거
 - **해결 방법**:
@@ -178,7 +180,7 @@ fetch(`/stay/room/unavailable-dates/${siId}/${riId}`)
 
 ---
 
-### 👤 마이페이지
+### 6️⃣ 마이페이지
 
 - 예약 내역 확인
 - 예약 취소 기능
@@ -186,7 +188,7 @@ fetch(`/stay/room/unavailable-dates/${siId}/${riId}`)
 
 ---
 
-### 📌 북마크
+### 7️⃣ 북마크
 
 - 북마크 테이블에 저장 + 숙소 테이블(`accommodation`)의 **bookmark_count 컬럼 증가/감소**
 - **Transaction 적용**
@@ -221,7 +223,7 @@ fetch(`/stay/room/unavailable-dates/${siId}/${riId}`)
 
 ---
 
-### 🌀 AOP 기반 HTTP 요청/응답 로깅
+### 8️⃣ AOP 기반 HTTP 요청/응답 로깅
 
 프로젝트에서는 Spring AOP를 활용하여 **컨트롤러 계층에서 발생하는 모든 HTTP 요청과 응답**을 로깅했습니다.
 
@@ -311,17 +313,13 @@ public class LogAdvice {
 
 ### 로그 예시
 
-**정상 요청**
-
-```
-[HTTP] user=jiseon GET /hotel/list?page=1 -> 200 HotelController.list() (123 ms)
-```
-
-**예외 발생**
-
-```
-[HTTP] user=anonymous POST /hotel/reserve -> ERROR ReservationController.reserve() (45 ms) NullPointerException
-```
+- **정상 요청**
+    
+    `[HTTP] user=jiseon GET /hotel/list?page=1 -> 200 HotelController.list() (123 ms)`
+    
+- **예외 발생**
+    
+    `[HTTP] user=anonymous POST /hotel/reserve -> ERROR ReservationController.reserve() (45 ms) NullPointerException`
 
 ---
 
