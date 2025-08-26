@@ -1,5 +1,8 @@
 # 📝 개인 개발 기록
 
+이 문서는 제가 개발한 부분에 대한 설명만 담고 있습니다. 전체 프로젝트는 팀 레파지토리를 확인해주세요. 
+[STAY FOLIO - team repository](https://github.com/Spring-team-Project2025/stay_folio_main)
+
 ## 👤 역할
 
 - **회원/예약 관련 기능 및 보안(Spring Security)** 담당
@@ -46,6 +49,20 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 }
 ```
 </details>
+<table>
+	<tr>
+		<td>처음 시도</td>
+		<td>해결 후</td>
+	</tr>
+	<tr>
+		<td><img width="1063" height="403" alt="KakaoTalk_20250826_104712781" src="https://github.com/user-attachments/assets/280c5983-8952-4234-a809-ae9f6a1dda96" /></td>
+		<td><img width="1142" height="438" alt="KakaoTalk_20250826_103916918" src="https://github.com/user-attachments/assets/e9946486-867c-41b9-8b07-2186b8d01251" /></td>
+	</tr>
+</table>
+
+관리자 로그인 시 
+![Adobe Express - 화면 녹화 중 2025-08-26 111047](https://github.com/user-attachments/assets/c5b8aae8-e37a-4c2d-9009-85dd4e8c2e7e)
+
 
 ---
 
@@ -66,6 +83,8 @@ vo.setMiPw(encodedPassword);	// 비밀번호 인코딩
 int result = commonMapper.handleRegister(vo);
 ```
 </details>
+
+![Adobe Express - 화면 녹화 중 2025-08-26 113721](https://github.com/user-attachments/assets/b958868e-0956-40f0-8abd-7463bfdd97b2)
 
 ---
 
@@ -177,6 +196,8 @@ fetch(`/stay/room/unavailable-dates/${siId}/${riId}`)
 ```
 </details>
 
+![Adobe Express - 화면 녹화 중 2025-08-26 115526](https://github.com/user-attachments/assets/42fba544-77d0-47f0-81c1-4bfa6310929a)
+
 
 ---
 
@@ -201,7 +222,7 @@ fetch(`/stay/room/unavailable-dates/${siId}/${riId}`)
 ```java
 
 @Transactional(rollbackFor = Exception.class)
-    public int addBookmark(String miId, int siId) {
+public int addBookmark(String miId, int siId) {
     int inserted = bookmarkMapper.addBookmark(miId, siId);
     if (inserted == 1) { // 새로 추가된 경우에만 카운트 +1
         stayMapper.incBookmarkCount(siId);
@@ -210,7 +231,7 @@ fetch(`/stay/room/unavailable-dates/${siId}/${riId}`)
 }
 
 @Transactional(rollbackFor = Exception.class)
-    public int deleteBookmark(String miId, int siId) {
+public int deleteBookmark(String miId, int siId) {
     int deleted = bookmarkMapper.deleteBookmark(miId, siId);
     if (deleted == 1) { // 실제 삭제된 경우에만 -1
         stayMapper.decBookmarkCount(siId);
@@ -219,7 +240,9 @@ fetch(`/stay/room/unavailable-dates/${siId}/${riId}`)
 }
 ```
 </details>
- 
+
+![Adobe Express - 화면 녹화 중 2025-08-26 122000](https://github.com/user-attachments/assets/947cc2b2-67bc-480e-a7ef-4ec102b43e79)
+
 
 ---
 
@@ -315,11 +338,11 @@ public class LogAdvice {
 
 - **정상 요청**
     
-    `[HTTP] user=jiseon GET /hotel/list?page=1 -> 200 HotelController.list() (123 ms)`
+    `[HTTP] user=anonymous GET /stay/room/unavailable-dates/3/1 -> 200 RoomController.getUnavailableDates() (41 ms)`
     
 - **예외 발생**
     
-    `[HTTP] user=anonymous POST /hotel/reserve -> ERROR ReservationController.reserve() (45 ms) NullPointerException`
+    `[HTTP] user=admin@naver.com POST /admin/stay/add -> ERROR AdminController.addStay() (311 ms) DataIntegrityViolationException`
 
 ---
 
